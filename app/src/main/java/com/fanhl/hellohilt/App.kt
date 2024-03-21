@@ -1,6 +1,7 @@
 package com.fanhl.hellohilt
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * @ClassName: App
@@ -8,4 +9,5 @@ import android.app.Application
  * @Author: honglin.fan
  * @Date 2024-3-21 15:36
  */
+@HiltAndroidApp
 class App : Application()
