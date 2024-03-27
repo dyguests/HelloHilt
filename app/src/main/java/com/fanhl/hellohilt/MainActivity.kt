@@ -29,9 +29,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val viewModel = hiltViewModel<MailViewModel>()
                     LazyColumn {
                         items(List(100) { it }) {
-                            Greeting("Item$it")
+                            Greeting("Item$it", viewModel)
                         }
                     }
                 }
@@ -41,8 +42,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    val viewModel = hiltViewModel<MailViewModel>()
+fun Greeting(name: String, viewModel: MailViewModel) {
+    //    val viewModel = hiltViewModel<MailViewModel>()
     Text(
         text = "Hello $name ${viewModel.hi}!",
         modifier = Modifier.padding(8.dp)
@@ -53,6 +54,6 @@ fun Greeting(name: String) {
 @Composable
 fun GreetingPreview() {
     HelloHiltTheme {
-        Greeting("Android")
+        Greeting("Android", hiltViewModel<MailViewModel>())
     }
 }
