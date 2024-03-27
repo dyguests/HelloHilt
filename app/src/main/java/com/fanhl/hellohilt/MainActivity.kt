@@ -3,14 +3,17 @@ package com.fanhl.hellohilt
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fanhl.hellohilt.ui.theme.HelloHiltTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,9 +29,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column {
-                        Greeting("Android")
-                        Greeting("iOS")
+                    LazyColumn {
+                        items(List(100) { it }) {
+                            Greeting("Item$it")
+                        }
                     }
                 }
             }
@@ -37,11 +41,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(name: String) {
     val viewModel = hiltViewModel<MailViewModel>()
     Text(
         text = "Hello $name ${viewModel.hi}!",
-        modifier = modifier
+        modifier = Modifier.padding(8.dp)
     )
 }
 
